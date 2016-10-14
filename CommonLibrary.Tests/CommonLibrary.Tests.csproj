@@ -60,6 +60,16 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommonLibrary.Contracts\CommonLibrary.Contracts.csproj">
+      <Project>{6518709e-6d8e-4cd6-81de-f6b07a02fd95}</Project>
+      <Name>CommonLibrary.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommonLibrary.Library\CommonLibrary.Library.csproj">
+      <Project>{29f9167c-3118-4e4a-b9c0-31003ce7945c}</Project>
+      <Name>CommonLibrary.Library</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

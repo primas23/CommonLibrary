@@ -18,8 +18,23 @@ namespace CommonLibrary.Library
         /// Initializes a new instance of the <see cref="LinearRegression"/> class. This is a linear regression analysis
         /// </summary>
         /// <param name="coordinates">The coordinates.</param>
+        /// <exception cref="System.ArgumentNullException">
+        /// The coordinates are null!
+        /// or
+        /// There is null coordinate!
+        /// </exception>
         public LinearRegression(IList<ICoordinates<decimal>> coordinates)
         {
+            if (coordinates == null)
+            {
+                throw new ArgumentNullException("The coordinates are null!");
+            }
+
+            if (coordinates.Count(c => c != null) != coordinates.Count)
+            {
+                throw new ArgumentNullException("There is null coordinate!");
+            }
+
             this.CoordinatesList = coordinates;
         }
 
