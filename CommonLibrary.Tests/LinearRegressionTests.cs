@@ -9,10 +9,11 @@ namespace CommonLibrary.Tests
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using MSTestExtensions;
+    using Moq;
 
     using CommonLibrary.Contracts;
     using CommonLibrary.Library;
-    
+
     /// <summary>
     /// Testing LinearRegression.cs
     /// </summary>
@@ -36,8 +37,8 @@ namespace CommonLibrary.Tests
         {
             IList<ICoordinates<decimal>> coordinateses = new List<ICoordinates<decimal>>
             {
-                new Coordinates<decimal>(1, 1),
-                new Coordinates<decimal>(2, 2),
+                new Mock<ICoordinates<decimal>>().Object,
+                new Mock<ICoordinates<decimal>>().Object,
                 null
             };
 
@@ -52,8 +53,8 @@ namespace CommonLibrary.Tests
         {
             IList<ICoordinates<decimal>> coordinateses = new List<ICoordinates<decimal>>
             {
-                new Coordinates<decimal>(1, 1),
-                new Coordinates<decimal>(2, 2)
+                new Mock<ICoordinates<decimal>>().Object,
+                new Mock<ICoordinates<decimal>>().Object
             };
 
             LinearRegression linearRegression = new LinearRegression(coordinateses);
@@ -67,11 +68,23 @@ namespace CommonLibrary.Tests
         [TestMethod]
         public void XMean_ShouldReturnCorrect_WhenCorrectAreSupplied()
         {
+            var mochCoorTwo = new Mock<ICoordinates<decimal>>();
+            mochCoorTwo.SetupGet(c => c.X).Returns(2);
+            mochCoorTwo.SetupGet(c => c.Y).Returns(2);
+
+            var mochCoorThree = new Mock<ICoordinates<decimal>>();
+            mochCoorThree.SetupGet(c => c.X).Returns(3);
+            mochCoorThree.SetupGet(c => c.Y).Returns(3);
+
+            var mochCoorFive = new Mock<ICoordinates<decimal>>();
+            mochCoorFive.SetupGet(c => c.X).Returns(5);
+            mochCoorFive.SetupGet(c => c.Y).Returns(5);
+
             IList<ICoordinates<decimal>> coordinateses = new List<ICoordinates<decimal>>
             {
-                new Coordinates<decimal>(2, 2),
-                new Coordinates<decimal>(3, 3),
-                new Coordinates<decimal>(5, 5)
+                mochCoorTwo.Object,
+                mochCoorThree.Object,
+                mochCoorFive.Object
             };
 
             LinearRegression linearRegression = new LinearRegression(coordinateses);
@@ -85,11 +98,23 @@ namespace CommonLibrary.Tests
         [TestMethod]
         public void YMean_ShouldReturnCorrect_WhenCorrectAreSupplied()
         {
+            var mochCoorTwo = new Mock<ICoordinates<decimal>>();
+            mochCoorTwo.SetupGet(c => c.X).Returns(2);
+            mochCoorTwo.SetupGet(c => c.Y).Returns(2);
+
+            var mochCoorThree = new Mock<ICoordinates<decimal>>();
+            mochCoorThree.SetupGet(c => c.X).Returns(3);
+            mochCoorThree.SetupGet(c => c.Y).Returns(3);
+
+            var mochCoorFive = new Mock<ICoordinates<decimal>>();
+            mochCoorFive.SetupGet(c => c.X).Returns(5);
+            mochCoorFive.SetupGet(c => c.Y).Returns(5);
+
             IList<ICoordinates<decimal>> coordinateses = new List<ICoordinates<decimal>>
             {
-                new Coordinates<decimal>(2, 2),
-                new Coordinates<decimal>(3, 3),
-                new Coordinates<decimal>(5, 5)
+                mochCoorTwo.Object,
+                mochCoorThree.Object,
+                mochCoorFive.Object
             };
 
             LinearRegression linearRegression = new LinearRegression(coordinateses);
