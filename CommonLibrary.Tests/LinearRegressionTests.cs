@@ -70,15 +70,12 @@ namespace CommonLibrary.Tests
         {
             var mochCoorTwo = new Mock<ICoordinates<decimal>>();
             mochCoorTwo.SetupGet(c => c.X).Returns(2);
-            mochCoorTwo.SetupGet(c => c.Y).Returns(2);
 
             var mochCoorThree = new Mock<ICoordinates<decimal>>();
             mochCoorThree.SetupGet(c => c.X).Returns(3);
-            mochCoorThree.SetupGet(c => c.Y).Returns(3);
 
             var mochCoorFive = new Mock<ICoordinates<decimal>>();
             mochCoorFive.SetupGet(c => c.X).Returns(5);
-            mochCoorFive.SetupGet(c => c.Y).Returns(5);
 
             IList<ICoordinates<decimal>> coordinateses = new List<ICoordinates<decimal>>
             {
@@ -99,15 +96,12 @@ namespace CommonLibrary.Tests
         public void YMean_ShouldReturnCorrect_WhenCorrectAreSupplied()
         {
             var mochCoorTwo = new Mock<ICoordinates<decimal>>();
-            mochCoorTwo.SetupGet(c => c.X).Returns(2);
             mochCoorTwo.SetupGet(c => c.Y).Returns(2);
 
             var mochCoorThree = new Mock<ICoordinates<decimal>>();
-            mochCoorThree.SetupGet(c => c.X).Returns(3);
             mochCoorThree.SetupGet(c => c.Y).Returns(3);
 
             var mochCoorFive = new Mock<ICoordinates<decimal>>();
-            mochCoorFive.SetupGet(c => c.X).Returns(5);
             mochCoorFive.SetupGet(c => c.Y).Returns(5);
 
             IList<ICoordinates<decimal>> coordinateses = new List<ICoordinates<decimal>>
@@ -128,18 +122,40 @@ namespace CommonLibrary.Tests
         [TestMethod]
         public void Slope_ShouldReturnCorrect_WhenCorrectAreSupplied()
         {
+            decimal slopeResult = 0.425m;
+
+            var mochCoorOne = new Mock<ICoordinates<decimal>>();
+            mochCoorOne.SetupGet(c => c.X).Returns(1);
+            mochCoorOne.SetupGet(c => c.Y).Returns(1);
+
+            var mochCoorSecond = new Mock<ICoordinates<decimal>>();
+            mochCoorSecond.SetupGet(c => c.X).Returns(2);
+            mochCoorSecond.SetupGet(c => c.Y).Returns(2);
+
+            var mochCoorThird = new Mock<ICoordinates<decimal>>();
+            mochCoorThird.SetupGet(c => c.X).Returns(3);
+            mochCoorThird.SetupGet(c => c.Y).Returns(1.30m);
+
+            var mochCoorFourth = new Mock<ICoordinates<decimal>>();
+            mochCoorFourth.SetupGet(c => c.X).Returns(4);
+            mochCoorFourth.SetupGet(c => c.Y).Returns(3.75m);
+
+            var mochCoorFifth = new Mock<ICoordinates<decimal>>();
+            mochCoorFifth.SetupGet(c => c.X).Returns(5);
+            mochCoorFifth.SetupGet(c => c.Y).Returns(2.25m);
+
             IList<ICoordinates<decimal>> coordinateses = new List<ICoordinates<decimal>>
             {
-                new Coordinates<decimal>(1, 1),
-                new Coordinates<decimal>(2, 2),
-                new Coordinates<decimal>(3, 1.30m),
-                new Coordinates<decimal>(4, 3.75m),
-                new Coordinates<decimal>(5, 2.25m)
+                mochCoorOne.Object,
+                mochCoorSecond.Object,
+                mochCoorThird.Object,
+                mochCoorFourth.Object,
+                mochCoorFifth.Object,
             };
 
             LinearRegression linearRegression = new LinearRegression(coordinateses);
 
-            Assert.AreEqual(0.425m, linearRegression.Slope);
+            Assert.AreEqual(slopeResult, linearRegression.Slope);
         }
 
         /// <summary>
@@ -148,18 +164,40 @@ namespace CommonLibrary.Tests
         [TestMethod]
         public void Interception_ShouldReturnCorrect_WhenCorrectAreSupplied()
         {
+            decimal interceptionResult = 0.785m;
+
+            var mochCoorOne = new Mock<ICoordinates<decimal>>();
+            mochCoorOne.SetupGet(c => c.X).Returns(1);
+            mochCoorOne.SetupGet(c => c.Y).Returns(1);
+
+            var mochCoorSecond = new Mock<ICoordinates<decimal>>();
+            mochCoorSecond.SetupGet(c => c.X).Returns(2);
+            mochCoorSecond.SetupGet(c => c.Y).Returns(2);
+
+            var mochCoorThird = new Mock<ICoordinates<decimal>>();
+            mochCoorThird.SetupGet(c => c.X).Returns(3);
+            mochCoorThird.SetupGet(c => c.Y).Returns(1.30m);
+
+            var mochCoorFourth = new Mock<ICoordinates<decimal>>();
+            mochCoorFourth.SetupGet(c => c.X).Returns(4);
+            mochCoorFourth.SetupGet(c => c.Y).Returns(3.75m);
+
+            var mochCoorFifth = new Mock<ICoordinates<decimal>>();
+            mochCoorFifth.SetupGet(c => c.X).Returns(5);
+            mochCoorFifth.SetupGet(c => c.Y).Returns(2.25m);
+
             IList<ICoordinates<decimal>> coordinateses = new List<ICoordinates<decimal>>
             {
-                new Coordinates<decimal>(1, 1),
-                new Coordinates<decimal>(2, 2),
-                new Coordinates<decimal>(3, 1.30m),
-                new Coordinates<decimal>(4, 3.75m),
-                new Coordinates<decimal>(5, 2.25m)
+                mochCoorOne.Object,
+                mochCoorSecond.Object,
+                mochCoorThird.Object,
+                mochCoorFourth.Object,
+                mochCoorFifth.Object,
             };
 
             LinearRegression linearRegression = new LinearRegression(coordinateses);
 
-            Assert.AreEqual(0.785m, linearRegression.YIntercept);
+            Assert.AreEqual(interceptionResult, linearRegression.YIntercept);
         }
 
         /// <summary>
@@ -168,13 +206,33 @@ namespace CommonLibrary.Tests
         [TestMethod]
         public void StandardError_ShouldReturnCorrectCoordinates_WhenCorrectAreSuppliedWhenThereIsNon()
         {
+            var mochCoorOne = new Mock<ICoordinates<decimal>>();
+            mochCoorOne.SetupGet(c => c.X).Returns(1);
+            mochCoorOne.SetupGet(c => c.Y).Returns(1);
+
+            var mochCoorSecond = new Mock<ICoordinates<decimal>>();
+            mochCoorSecond.SetupGet(c => c.X).Returns(2);
+            mochCoorSecond.SetupGet(c => c.Y).Returns(2);
+
+            var mochCoorThird = new Mock<ICoordinates<decimal>>();
+            mochCoorThird.SetupGet(c => c.X).Returns(3);
+            mochCoorThird.SetupGet(c => c.Y).Returns(3);
+
+            var mochCoorFourth = new Mock<ICoordinates<decimal>>();
+            mochCoorFourth.SetupGet(c => c.X).Returns(4);
+            mochCoorFourth.SetupGet(c => c.Y).Returns(4);
+
+            var mochCoorFifth = new Mock<ICoordinates<decimal>>();
+            mochCoorFifth.SetupGet(c => c.X).Returns(5);
+            mochCoorFifth.SetupGet(c => c.Y).Returns(5);
+
             IList<ICoordinates<decimal>> coordinateses = new List<ICoordinates<decimal>>
             {
-                new Coordinates<decimal>(1, 1),
-                new Coordinates<decimal>(2, 2),
-                new Coordinates<decimal>(3, 3),
-                new Coordinates<decimal>(4, 4),
-                new Coordinates<decimal>(5, 5)
+                mochCoorOne.Object,
+                mochCoorSecond.Object,
+                mochCoorThird.Object,
+                mochCoorFourth.Object,
+                mochCoorFifth.Object,
             };
 
             LinearRegression linearRegression = new LinearRegression(coordinateses);
@@ -188,18 +246,40 @@ namespace CommonLibrary.Tests
         [TestMethod]
         public void StandardError_ShouldReturnCorrectCoordinates_WhenCorrectAreSuppliedWhenThereIs()
         {
+            decimal standartErrorResult = 0.964m;
+
+            var mochCoorOne = new Mock<ICoordinates<decimal>>();
+            mochCoorOne.SetupGet(c => c.X).Returns(1);
+            mochCoorOne.SetupGet(c => c.Y).Returns(1);
+
+            var mochCoorSecond = new Mock<ICoordinates<decimal>>();
+            mochCoorSecond.SetupGet(c => c.X).Returns(2);
+            mochCoorSecond.SetupGet(c => c.Y).Returns(2);
+
+            var mochCoorThird = new Mock<ICoordinates<decimal>>();
+            mochCoorThird.SetupGet(c => c.X).Returns(3);
+            mochCoorThird.SetupGet(c => c.Y).Returns(1.30m);
+
+            var mochCoorFourth = new Mock<ICoordinates<decimal>>();
+            mochCoorFourth.SetupGet(c => c.X).Returns(4);
+            mochCoorFourth.SetupGet(c => c.Y).Returns(3.75m);
+
+            var mochCoorFifth = new Mock<ICoordinates<decimal>>();
+            mochCoorFifth.SetupGet(c => c.X).Returns(5);
+            mochCoorFifth.SetupGet(c => c.Y).Returns(2.25m);
+
             IList<ICoordinates<decimal>> coordinateses = new List<ICoordinates<decimal>>
             {
-                new Coordinates<decimal>(1, 1),
-                new Coordinates<decimal>(2, 2),
-                new Coordinates<decimal>(3, 1.30m),
-                new Coordinates<decimal>(4, 3.75m),
-                new Coordinates<decimal>(5, 2.25m)
+                mochCoorOne.Object,
+                mochCoorSecond.Object,
+                mochCoorThird.Object,
+                mochCoorFourth.Object,
+                mochCoorFifth.Object,
             };
 
             LinearRegression linearRegression = new LinearRegression(coordinateses);
 
-            Assert.AreEqual(0.964m, Math.Round(linearRegression.StandardError, 3));
+            Assert.AreEqual(standartErrorResult, Math.Round(linearRegression.StandardError, 3));
         }
 
         /// <summary>
@@ -208,13 +288,33 @@ namespace CommonLibrary.Tests
         [TestMethod]
         public void GetNextPredictedNumber_ShouldReturnCorrectCoordinates_WhenCorrectAreSupplied()
         {
+            var mochCoorOne = new Mock<ICoordinates<decimal>>();
+            mochCoorOne.SetupGet(c => c.X).Returns(1);
+            mochCoorOne.SetupGet(c => c.Y).Returns(1);
+
+            var mochCoorSecond = new Mock<ICoordinates<decimal>>();
+            mochCoorSecond.SetupGet(c => c.X).Returns(2);
+            mochCoorSecond.SetupGet(c => c.Y).Returns(2);
+
+            var mochCoorThird = new Mock<ICoordinates<decimal>>();
+            mochCoorThird.SetupGet(c => c.X).Returns(3);
+            mochCoorThird.SetupGet(c => c.Y).Returns(3);
+
+            var mochCoorFourth = new Mock<ICoordinates<decimal>>();
+            mochCoorFourth.SetupGet(c => c.X).Returns(4);
+            mochCoorFourth.SetupGet(c => c.Y).Returns(4);
+
+            var mochCoorFifth = new Mock<ICoordinates<decimal>>();
+            mochCoorFifth.SetupGet(c => c.X).Returns(5);
+            mochCoorFifth.SetupGet(c => c.Y).Returns(5);
+
             IList<ICoordinates<decimal>> coordinateses = new List<ICoordinates<decimal>>
             {
-                new Coordinates<decimal>(1, 1),
-                new Coordinates<decimal>(2, 2),
-                new Coordinates<decimal>(3, 3),
-                new Coordinates<decimal>(4, 4),
-                new Coordinates<decimal>(5, 5)
+                mochCoorOne.Object,
+                mochCoorSecond.Object,
+                mochCoorThird.Object,
+                mochCoorFourth.Object,
+                mochCoorFifth.Object,
             };
 
             LinearRegression linearRegression = new LinearRegression(coordinateses);

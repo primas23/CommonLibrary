@@ -25,15 +25,8 @@ namespace CommonLibrary.Library
         /// </exception>
         public LinearRegression(IList<ICoordinates<decimal>> coordinates)
         {
-            if (coordinates == null)
-            {
-                throw new ArgumentNullException("The coordinates are null!");
-            }
-
-            if (coordinates.Count(c => c != null) != coordinates.Count)
-            {
-                throw new ArgumentNullException("There is null coordinate!");
-            }
+            this.ValidateIfListNull(coordinates);
+            this.ValidateIfThereIsNullCoordinate(coordinates);
 
             this.CoordinatesList = coordinates;
         }
@@ -192,7 +185,33 @@ namespace CommonLibrary.Library
         }
 
         /// <summary>
-        /// Gets the next predicted number.
+        /// Validates if list is null.
+        /// </summary>
+        /// <param name="coordinates">The coordinates.</param>
+        /// <exception cref="ArgumentNullException">The coordinates are null!</exception>
+        private void ValidateIfListNull(IList<ICoordinates<decimal>> coordinates)
+        {
+            if (coordinates == null)
+            {
+                throw new ArgumentNullException("The coordinates are null!");
+            }
+        }
+
+        /// <summary>
+        /// Validates if there is null coordinate.
+        /// </summary>
+        /// <param name="coordinates">The coordinates.</param>
+        /// <exception cref="ArgumentNullException">There is null coordinate!</exception>
+        private void ValidateIfThereIsNullCoordinate(IList<ICoordinates<decimal>> coordinates)
+        {
+            if (coordinates.Count(c => c != null) != coordinates.Count)
+            {
+                throw new ArgumentNullException("There is null coordinate!");
+            }
+        }
+
+        /// <summary>
+        /// Gets the next predicted number y.
         /// </summary>
         /// <param name="x">The x.</param>
         /// <returns>The predicted number</returns>
